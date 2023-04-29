@@ -1,10 +1,11 @@
 import Typography from "@mui/material/Typography";
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import Button from "@mui/material/Button";
+import CircularProgress from '@mui/material/CircularProgress';
 import dayjs from 'dayjs';
 
 export default function Alarm(props) {
-    if (props.setAlarm) {
+    if (props.setAlarm && !props.loading) {
         return (
             <>
                 <h2 component="h1" variant="h4">
@@ -13,10 +14,10 @@ export default function Alarm(props) {
                 <Typography component="h1" variant="h1">
                     {props.alarm}
                 </Typography>
-                <Button variant="contained" size="large" onClick={() => props.cancel()}  sx={{marginTop: 3}}>Reset Alarm</Button>
+                <Button variant="contained" size="large" onClick={() => props.cancel()} sx={{ marginTop: 3 }}>Reset Alarm</Button>
             </>
         )
-    } else {
+    } else if (!props.loading) {
         return (
             <>
                 <h2 component="h1" variant="h4">
@@ -29,6 +30,10 @@ export default function Alarm(props) {
                     onAccept={(newValue) => props.process(newValue)}
                 />
             </>
+        )
+    } else {
+        return (
+            <CircularProgress sx={{marginTop: 5}}/>
         )
     }
 }

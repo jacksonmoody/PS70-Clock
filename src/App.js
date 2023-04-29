@@ -12,6 +12,7 @@ import Alarm from './Alarm';
 function App() {
   const [alarm, setAlarm] = useState(dayjs('2022-04-17T15:30'));
   const [alarmSet, setAlarmSet] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [time, setTime] = useState(new Date());
 
   async function getAPI(url) {
@@ -21,6 +22,7 @@ function App() {
     let data = await response.json();
     console.log(data);
     if (response) {
+        setLoading(false);
         setAlarm(data.alarm);
         if (data.alarm !== "") {
           setAlarmSet(true);
@@ -48,7 +50,7 @@ function App() {
 
   function process(newValue) {
     setAlarmSet(true);
-    
+    setLoading(true);
     const jsonData = JSON.stringify({
       alarm: newValue.format('h:mm A'),
       state: 0,
@@ -110,7 +112,7 @@ function App() {
             <Typography component="h1" variant="h1">
               {time.toLocaleTimeString()}
             </Typography>
-            <Alarm alarm={alarm} setAlarm={alarmSet} cancel={cancel} process={process} />
+            <Alarm alarm={alarm} setAlarm={alarmSet} cancel={cancel} process={process} loading={loading}/>
           </Box>
         </Container>
         <div className="footer">
