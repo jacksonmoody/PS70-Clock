@@ -53,11 +53,9 @@ function App() {
     setLoading(true);
     const jsonData = JSON.stringify({
       alarm: newValue.format('h:mm A'),
-      state: 0,
-      id: getRandomInt(0, 10000)
     });
 
-    fetch('https://ps70-final.vercel.app/', {
+    fetch('https://ps70-final.vercel.app/alarm', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -76,7 +74,7 @@ function App() {
     const jsonData = JSON.stringify({
       alarm: ""
     });
-    fetch('https://ps70-final.vercel.app/', {
+    fetch('https://ps70-final.vercel.app/alarm', {
       method: 'POST',
       mode: 'cors',
       headers: {
