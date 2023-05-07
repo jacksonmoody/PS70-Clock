@@ -26,7 +26,6 @@ export default function Alarm(props) {
                 <MobileTimePicker
                     label="Set Alarm"
                     defaultValue={dayjs()}
-                    disablePast
                     onAccept={(newValue) => props.process(newValue)}
                 />
             </>

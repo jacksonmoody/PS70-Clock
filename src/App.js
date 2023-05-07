@@ -35,7 +35,7 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
-      getAPI("https://ps70-final.vercel.app/");
+      getAPI("https://ps70-final.vercel.app/alarm");
     }, 1000);
 
     return () => clearInterval(interval);
@@ -74,9 +74,7 @@ function App() {
     setAlarm("");
 
     const jsonData = JSON.stringify({
-      alarm: "",
-      state: 0,
-      id: getRandomInt(0, 10000)
+      alarm: ""
     });
     fetch('https://ps70-final.vercel.app/', {
       method: 'POST',
